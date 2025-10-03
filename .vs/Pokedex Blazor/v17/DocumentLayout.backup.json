@@ -1,7 +1,12 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\muham\\OneDrive\\Desktop\\Pokedex Blazor\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|c:\\users\\muham\\onedrive\\documents\\github\\pokedex\\pages\\pokedex.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|solutionrelative:pages\\pokedex.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +23,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Pokedex.razor",
+              "DocumentMoniker": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor",
+              "RelativeDocumentMoniker": "Pages\\Pokedex.razor",
+              "ToolTip": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor",
+              "RelativeToolTip": "Pages\\Pokedex.razor",
+              "ViewState": "AgIAAH0BAAAAAAAAAAAAAKIBAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-03T00:21:32.492Z",
+              "EditorCaption": ""
             }
           ]
         }

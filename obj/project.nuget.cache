@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "b/WGcmuyCyc=",
+  "dgSpecHash": "ksIXoTPr8JQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\muham\\OneDrive\\Desktop\\Pokedex Blazor\\Pokedex Blazor.csproj",
+  "projectFilePath": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pokedex Blazor.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muham\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.20\\microsoft.aspnetcore.authorization.8.0.20.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.20\\microsoft.aspnetcore.components.8.0.20.nupkg.sha512",

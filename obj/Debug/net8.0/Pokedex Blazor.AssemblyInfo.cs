@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Pokedex Blazor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b98093d4b23b78f3ee230746f1905dd5d1af3d99")]
 [assembly: System.Reflection.AssemblyProductAttribute("Pokedex Blazor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Pokedex Blazor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
