@@ -1,0 +1,452 @@
+﻿@page "/"
+@using System.Net.Http.Json
+@using System.Text.Json
+@inject HttpClient Http
+
+<div class="pokedex">
+    <div class="pokedex-header">
+        <h2>Pokédex</h2>
+    </div>
+
+    <div class="pokedex-body">
+        <div class="controls">
+            <div class="filter-dropdown">
+                <button class="filter-btn" @onclick="ToggleFilterPanel">Filter ▾</button>
+                <input type="text"
+                       class="search-bar"
+                       placeholder="Search"
+                       @oninput="SearchPokemon" />
+                @if (showFilterPanel)
+                {
+                    <div class="filter-panel">
+                        <select value="@selectedCategory?.key" @onchange="FilterCategoryChanged">
+                            <option value="">All Pokémon</option>
+                            @foreach (var c in filterCategories)
+                            {
+                                <option value="@c.key">@c.name</option>
+                            }
+                        </select>
+
+                        <select value="@selectedValue" @onchange="FilterValueChanged" disabled="@(!filterValues?.Any() ?? true)">
+                            <option value="">Select @selectedCategory?.name</option>
+                            @if (filterValues != null)
+                            {
+                                @foreach (var v in filterValues)
+                                {
+                                    <option value="@v.name">@v.name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="scroll-list">
+            @foreach (var p in names)
+            {
+                <div class="card" @onclick="() => LoadAllPokemon(next)">
+                    <span class="card-name">@p.name</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .search-bar {
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 1em;
+        width: 200px;
+    }
+    .filter-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .filter-btn {
+        background-color: #ef5350;
+        color: white;
+        font-weight: bold;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .filter-btn:hover {
+            background-color: #ff6666;
+        }
+
+    .filter-panel {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 8px;
+        margin-top: 4px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 180px;
+    }
+
+        .filter-panel select {
+            padding: 6px 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+    .pokedex {
+        max-width: 600px;
+        margin: 24px auto;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pokedex-header {
+        background-color: red;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 1.8em;
+        font-weight: bold;
+        border-bottom: 4px solid black;
+    }
+
+    .pokedex-body {
+        background-color: white;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        height: 600px;
+    }
+
+    .controls {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .page-number {
+        font-weight: bold;
+        font-size: 1em;
+        margin-right: auto;
+    }
+
+    .scroll-list {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding-right: 4px;
+    }
+
+    .card {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 12px;
+        background: linear-gradient(180deg, #fff, #f8f8f8);
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+    }
+
+        .card:hover {
+            border: 2px solid #00bcd4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .card:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+    .card-name {
+        text-transform: capitalize;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .pokemon-btn {
+        padding: 6px 12px;
+        border-radius: 8px;
+        border: none;
+        background-color: #ef5350;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
+    }
+
+        .pokemon-btn:hover {
+            background-color: #ff6666;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+        }
+
+        .pokemon-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            background-color: #b2ebf2;
+        }
+</style>
+
+@code {
+    [Inject] private IJSRuntime JS { get; set; }
+    private static readonly HttpClient client = new HttpClient();
+
+    private string searchText = "";
+    private int pageNumber = 1;
+    private bool showFilterPanel = false;
+    private string next = "";
+    private string prev = "";
+
+    private List<PokemonResult> names = new List<PokemonResult>();
+    private List<PokemonResult> allTypes = new List<PokemonResult>();
+    private List<PokemonResult> filteredList;
+
+    private List<FilterCategory> filterCategories = new List<FilterCategory>
+    {
+        new FilterCategory { key = "type", name = "Type" },
+        new FilterCategory { key = "ability", name = "Ability" },
+        new FilterCategory { key = "color", name = "Color" },
+        new FilterCategory { key = "shape", name = "Shape" },
+        new FilterCategory { key = "habitat", name = "Habitat" },
+        new FilterCategory { key = "generation", name = "Generation" }
+    };
+
+    private FilterCategory selectedCategory;
+    private string selectedValue;
+    private List<PokemonResult> filterValues;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
+    }
+
+    // Load full Pokémon list with caching
+    private async Task<PokemonListResponse> LoadAllPokemon(string url)
+    {
+        var cached = await LoadCacheAsync<PokemonListResponse>(url);
+        if (cached != null && cached.results?.Count > 0)
+        {
+            names = cached.results;
+            next = cached.next;
+            prev = cached.previous;
+            return cached;
+        }
+
+        var response = await client.GetFromJsonAsync<PokemonListResponse>(url);
+        if (response != null)
+        {
+            names = response.results;
+            next = response.next;
+            prev = response.previous;
+            await SaveCacheAsync(url, response);
+        }
+
+        return response;
+    }
+
+    // Caching functions
+    private async Task SaveCacheAsync<T>(string key, T data)
+    {
+        var json = JsonSerializer.Serialize(data);
+        await JS.InvokeVoidAsync("localStorage.setItem", key, json);
+    }
+
+    private async Task<T> LoadCacheAsync<T>(string key)
+    {
+        var json = await JS.InvokeAsync<string>("localStorage.getItem", key);
+        if (string.IsNullOrEmpty(json)) return default;
+        return JsonSerializer.Deserialize<T>(json);
+    }
+
+    // Filtering
+    private async Task FilterCategoryChanged(ChangeEventArgs e)
+    {
+        var selectedKey = e.Value?.ToString();
+        selectedCategory = filterCategories.FirstOrDefault(c => c.key == selectedKey);
+        selectedValue = null;
+        filterValues = null;
+
+        if (string.IsNullOrEmpty(selectedKey))
+        {
+            await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
+            pageNumber = 1;
+            return;
+        }
+
+        string url = selectedCategory.key switch
+        {
+            "type" => "https://pokeapi.co/api/v2/type",
+            "ability" => "https://pokeapi.co/api/v2/ability",
+            "color" => "https://pokeapi.co/api/v2/pokemon-color",
+            "shape" => "https://pokeapi.co/api/v2/pokemon-shape",
+            "habitat" => "https://pokeapi.co/api/v2/pokemon-habitat",
+            "generation" => "https://pokeapi.co/api/v2/generation",
+            _ => ""
+        };
+
+        if (string.IsNullOrEmpty(url)) return;
+
+        var cached = await LoadCacheAsync<PokemonListResponse>(url);
+        if (cached != null)
+            filterValues = cached.results;
+        else
+        {
+            var response = await client.GetFromJsonAsync<PokemonListResponse>(url);
+            if (response != null)
+            {
+                filterValues = response.results;
+                await SaveCacheAsync(url, response);
+            }
+        }
+    }
+
+    private async Task FilterValueChanged(ChangeEventArgs e)
+    {
+        selectedValue = e.Value?.ToString();
+
+        if (string.IsNullOrEmpty(selectedValue))
+        {
+            await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
+            pageNumber = 1;
+            return;
+        }
+
+        if (selectedCategory != null)
+            await FilterByCategoryValue(selectedCategory.key, selectedValue);
+    }
+
+    private async Task FilterByCategoryValue(string categoryKey, string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
+            pageNumber = 1;
+            filteredList = new List<PokemonResult>(names); // store full list
+            return;
+        }
+
+        string url = categoryKey switch
+        {
+            "type" => $"https://pokeapi.co/api/v2/type/{value}",
+            "ability" => $"https://pokeapi.co/api/v2/ability/{value}",
+            "color" => $"https://pokeapi.co/api/v2/pokemon-color/{value}",
+            "shape" => $"https://pokeapi.co/api/v2/pokemon-shape/{value}",
+            "habitat" => $"https://pokeapi.co/api/v2/pokemon-habitat/{value}",
+            "generation" => $"https://pokeapi.co/api/v2/generation/{value}",
+            _ => ""
+        };
+
+        if (string.IsNullOrEmpty(url)) return;
+
+        List<PokemonResult> filtered;
+
+        if (categoryKey == "type" || categoryKey == "ability")
+        {
+            var cached = await LoadCacheAsync<CategoryResult>(url);
+            if (cached != null)
+                filtered = cached.pokemon.Select(p => p.pokemon).ToList();
+            else
+            {
+                var response = await client.GetFromJsonAsync<CategoryResult>(url);
+                filtered = response.pokemon.Select(p => p.pokemon).ToList();
+                await SaveCacheAsync(url, response);
+            }
+        }
+        else
+        {
+            var cached = await LoadCacheAsync<PokemonSpecies>(url);
+            if (cached != null)
+                filtered = cached.pokemon_species.Select(p => new PokemonResult { name = p.name, url = $"https://pokeapi.co/api/v2/pokemon/{p.name}" }).ToList();
+            else
+            {
+                var response = await client.GetFromJsonAsync<PokemonSpecies>(url);
+                filtered = response.pokemon_species.Select(p => new PokemonResult { name = p.name, url = $"https://pokeapi.co/api/v2/pokemon/{p.name}" }).ToList();
+                await SaveCacheAsync(url, response);
+            }
+        }
+
+        names = filtered;
+        filteredList = new List<PokemonResult>(names); // store filtered list for search
+        pageNumber = 1;
+        StateHasChanged();
+    }
+
+
+    private void ToggleFilterPanel()
+    {
+        showFilterPanel = !showFilterPanel;
+    }
+
+    private void SearchPokemon(ChangeEventArgs e)
+    {
+        var searchValue = e.Value?.ToString() ?? "";
+
+        if (string.IsNullOrWhiteSpace(searchValue))
+        {
+            names = filteredList != null ? new List<PokemonResult>(filteredList) : names;
+            return;
+        }
+
+        names = filteredList
+            .Where(p => p.name.Contains(searchValue, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+    }
+
+    // Data Models
+    public class PokemonListResponse
+    {
+        public List<PokemonResult> results { get; set; }
+        public string next { get; set; }
+        public string previous { get; set; }
+    }
+
+    public class PokemonResult
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    public class CategoryResult
+    {
+        public List<PokemonEntry> pokemon { get; set; }
+    }
+
+    public class PokemonEntry
+    {
+        public PokemonResult pokemon { get; set; }
+    }
+
+    public class FilterCategory
+    {
+        public string key { get; set; }
+        public string name { get; set; }
+    }
+
+    public class PokemonSpecies
+    {
+        public List<PokemonResult> pokemon_species { get; set; }
+    }
+}
