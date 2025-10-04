@@ -162,12 +162,12 @@
 
         <div class="pokedex-body">
             <div class="controls">
+                <input type="text"
+                       class="search-bar"
+                       placeholder="Search"
+                       @oninput="SearchPokemon" />
                 <div class="filter-dropdown">
                     <button class="filter-btn" @onclick="ToggleFilterPanel">Filter ▾</button>
-                    <input type="text"
-                           class="search-bar"
-                           placeholder="Search"
-                           @oninput="SearchPokemon" />
                      
                     @if (showFilterPanel)
                     {

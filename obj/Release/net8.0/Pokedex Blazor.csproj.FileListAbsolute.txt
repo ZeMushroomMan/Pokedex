@@ -1025,9 +1025,6 @@ C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\h
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\c2q2keoy23-tptq2av103.gz
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\0mp7aywxsj-lfu7j35m59.gz
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\e5pkiw0ra8-oyz0vx2fzb.gz
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\qfyd3ji2tu-hd2t99o1jp.gz
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\gws6f7zxby-0brjhwalar.gz
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\zvsvo8u4dn-36ezy8galt.gz
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\staticwebassets.build.json
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\staticwebassets.build.json.cache
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\staticwebassets.development.json
@@ -1037,3 +1034,7 @@ C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\Pokedex Blaz
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\refint\Pokedex Blazor.dll
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\Pokedex Blazor.pdb
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\ref\Pokedex Blazor.dll
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\qfyd3ji2tu-wvgbaxfr38.gz
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\gws6f7zxby-fvron8o3u5.gz
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\zvsvo8u4dn-5iefg1nytr.gz

@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Pokedex Blazor",
   "resources": {
-    "hash": "sha256-Vq942tTKdLd12gLgGdXGbeTnJ9gFpQDCAkaGosIsJVY=",
+    "hash": "sha256-BetxWVQOSRICkWuSEls5Z7gUyjJIZTYGh/nU8VX0ypo=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-D0bzod5lwwSzPR43JC8TTCcZKw+3jIHOk8CZFCRj5is="
     },
@@ -209,10 +209,10 @@
       "mscorlib.wasm": "sha256-8qWtIcy8fV43tlcx4DxsF45RlkcfK6588vVoxF7be2E=",
       "netstandard.wasm": "sha256-eOgz2RiO4YaPLOMIGgVLNrcfsQhmLQJzR0N7Pu2teXc=",
       "System.Private.CoreLib.wasm": "sha256-F8T63QCIbMPXPQPqTcuyBAw+oVvZSrWjy88j7fiJQZ4=",
-      "Pokedex Blazor.wasm": "sha256-Rd7ZOgNV+hB+PbU8SY9IrB64av9WczLP3+0pVNcvFCw="
+      "Pokedex Blazor.wasm": "sha256-xLfySrJFT9SGi2JcGvBMlk6dl3Vl1JyfaKDCRgvIRB8="
     },
     "pdb": {
-      "Pokedex Blazor.pdb": "sha256-/CGeoB4J50NEpRUFWlgQQCpR6YNfb8f1OyyPyMv4T3k="
+      "Pokedex Blazor.pdb": "sha256-5YWFxgbp96Pn2NFS4Sj0uJJVFhkGvW8ctAV4e+fhbzA="
     }
   },
   "cacheBootResources": true,

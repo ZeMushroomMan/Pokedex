@@ -103,26 +103,29 @@ namespace Pokedex_Blazor.Pages
                         ComparePokemon(comparePokemon1, comparePokemon2);
                     }
                     errorMessage = null; // Reset error message on success
+                    StateHasChanged();
                     return cache;
+
                 }
                 if (selectedPokemon == null)
                 {
                     var data = await Http.GetFromJsonAsync<PokemonDetails>(url);
                     selectedPokemon = data;
                     await SaveCacheAsync(url, selectedPokemon);
-                    if (showComparePanel && (comparePokemon1 is null))
-                    {
-                        comparePokemon1 = selectedPokemon;
-                    }
-                    else if (showComparePanel && comparePokemon2 is null)
+                    if (showComparePanel && (comparePokemon2 is null))
                     {
                         comparePokemon2 = selectedPokemon;
+                    }
+                    else if (showComparePanel && comparePokemon1 is null)
+                    {
+                        comparePokemon1 = selectedPokemon;
                     }
                     if (comparePokemon1 != null && comparePokemon2 != null)
                     {
                         ComparePokemon(comparePokemon1, comparePokemon2);
                     }
                     errorMessage = null; // Reset error message on success
+                    StateHasChanged();
                     return data;
                 }
                 return null;
@@ -140,6 +143,7 @@ namespace Pokedex_Blazor.Pages
             selectedPokemon = null;
             comparePokemon1 = null;
             comparePokemon2 = null;
+            StateHasChanged();
         }
 
         // Caching functions
@@ -326,6 +330,7 @@ namespace Pokedex_Blazor.Pages
                 }).ToList();
 
                 filteredList = new List<PokemonResult>(names);
+                showFilterPanel = false;
                 StateHasChanged();
             }
             catch (Exception ex) { 

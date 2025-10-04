@@ -182,6 +182,10 @@
     .type.fairy {
         background-color: #ee99ac;
     }
+    .type.normal {
+        background-color: lightgrey;
+        color: black;
+    }
 
 .stats-table {
     width: 100%;

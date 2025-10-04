@@ -385,6 +385,10 @@ main[b-j2n0ueugio] {
     .type.fairy[b-tgrt1jomow] {
         background-color: #ee99ac;
     }
+    .type.normal[b-tgrt1jomow] {
+        background-color: lightgrey;
+        color: black;
+    }
 
 .stats-table[b-tgrt1jomow] {
     width: 100%;
