@@ -16,9 +16,9 @@ namespace Pokedex_Blazor.Pages
         private bool showFilterPanel = false;
         private bool showComparePanel = false;
 
-        private List<PokemonResult> names = new List<PokemonResult>(); // List of pokemon that gets displayed in the UI. Update this if you want to display any pokemon names to the UI.
+        private List<PokemonResult>? names = new List<PokemonResult>(); // List of pokemon that gets displayed in the UI. Update this if you want to display any pokemon names to the UI.
         private List<PokemonResult> allTypes = new List<PokemonResult>();
-        private List<PokemonResult> filteredList; //List of filtered pokemon by category to be saved for searching function.
+        private List<PokemonResult>? filteredList; //List of filtered pokemon by category to be saved for searching function.
 
         private List<FilterCategory> filterCategories = new List<FilterCategory> // Categeries to filter by
     {
@@ -32,18 +32,21 @@ namespace Pokedex_Blazor.Pages
 
         private FilterCategory selectedCategory;
         private string selectedValue;
-        private List<PokemonResult> filterValues;
+        private List<PokemonResult>? filterValues;
         private PokemonDetails? selectedPokemon;
 
         private PokemonDetails? comparePokemon1;
         private PokemonDetails? comparePokemon2;
         private PokemonDetails winner;
 
+        private string errorMessage = null;
+        private string mainURL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000";
+
         //constructor that runs at start of the page. Passes the url to make the API call to, to fetch names and urls of all pokemon currently on the API and saves it into a List
         protected override async Task OnInitializedAsync()
         {
-            await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
-            Console.WriteLine("Begin");
+            await LoadAllPokemon(mainURL);
+            Console.WriteLine(names);
         }
 
         // Load entire list of Pokémon from the api call and caches it for future calls. Saves all the data retrieved into a list.
@@ -55,6 +58,7 @@ namespace Pokedex_Blazor.Pages
                 if (cached != null && cached.results?.Count > 0)
                 {
                     names = cached.results;
+                    errorMessage = null; // Reset error message on success
                     return cached;
                 }
 
@@ -63,13 +67,16 @@ namespace Pokedex_Blazor.Pages
                 {
                     names = response.results;
                     await SaveCacheAsync(url, response);
+                    errorMessage = null; // Reset error message on success
                 }
 
                 return response;
             }
             catch (Exception ex)
-            {
+            {   
+                errorMessage = "Failed to fetch pokemon data";
                 Console.WriteLine(ex);
+                names = null;
                 return null;
             }
         }
@@ -79,7 +86,6 @@ namespace Pokedex_Blazor.Pages
         {
             try
             {
-                
                 var cache = await LoadCacheAsync<PokemonDetails>(url);
                 selectedPokemon = cache;
                 if(selectedPokemon != null)
@@ -96,6 +102,7 @@ namespace Pokedex_Blazor.Pages
                     {
                         ComparePokemon(comparePokemon1, comparePokemon2);
                     }
+                    errorMessage = null; // Reset error message on success
                     return cache;
                 }
                 if (selectedPokemon == null)
@@ -110,20 +117,24 @@ namespace Pokedex_Blazor.Pages
                     else if (showComparePanel && comparePokemon2 is null)
                     {
                         comparePokemon2 = selectedPokemon;
-                        
                     }
                     if (comparePokemon1 != null && comparePokemon2 != null)
                     {
                         ComparePokemon(comparePokemon1, comparePokemon2);
                     }
+                    errorMessage = null; // Reset error message on success
                     return data;
                 }
-                    return null;
+                return null;
             }
-            catch (Exception ex) { Console.WriteLine(ex);
+            catch (Exception ex) { 
+                Console.WriteLine(ex);
+                errorMessage = "Failed to load Pokémon details.";
                 return null;
             }
         }
+
+        //Clears all selected pokemon data when clear is clicked
         private void Clear()
         {
             selectedPokemon = null;
@@ -137,15 +148,34 @@ namespace Pokedex_Blazor.Pages
         //Stores data and uses the url for the api call as the key so if the same url is passed it can fetch the cached data first
         private async Task SaveCacheAsync<T>(string key, T data)
         {
-            var json = JsonSerializer.Serialize(data);
-            await JS.InvokeVoidAsync("localStorage.setItem", key, json);
+            try
+            {
+                errorMessage = null;
+                var json = JsonSerializer.Serialize(data);
+                await JS.InvokeVoidAsync("localStorage.setItem", key, json);
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Failed to save data to cache.";
+                Console.WriteLine($"Error saving to cache: {ex.Message}");
+            }
         }
         //Loads the cached data from the url key stored
         private async Task<T> LoadCacheAsync<T>(string key)
         {
-            var json = await JS.InvokeAsync<string>("localStorage.getItem", key);
-            if (string.IsNullOrEmpty(json)) return default;
-            return JsonSerializer.Deserialize<T>(json);
+            try
+            {
+                errorMessage = null;
+                var json = await JS.InvokeAsync<string>("localStorage.getItem", key);
+                if (string.IsNullOrEmpty(json)) return default;
+                return JsonSerializer.Deserialize<T>(json);
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Failed to load cached data.";
+                Console.WriteLine($"Error loading from cache: {ex.Message}");
+                return default;
+            }
         }
         #endregion
 
@@ -163,7 +193,8 @@ namespace Pokedex_Blazor.Pages
 
                 if (string.IsNullOrEmpty(selectedKey))
                 {
-                    await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
+                    await LoadAllPokemon(mainURL);
+                    filteredList = new List<PokemonResult>(names);
                     return;
                 }
 
@@ -198,6 +229,9 @@ namespace Pokedex_Blazor.Pages
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                filterValues = null;
+                filteredList = null;
+                names = null;
                 return;
             }
         }
@@ -211,14 +245,20 @@ namespace Pokedex_Blazor.Pages
 
                 if (string.IsNullOrEmpty(selectedValue))
                 {
-                    await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
+                    await LoadAllPokemon(mainURL);
+                    filteredList = new List<PokemonResult>(names);
                     return;
                 }
 
                 if (selectedCategory != null)
                     await FilterByCategoryValue(selectedCategory.key, selectedValue);
             }
-            catch (Exception ex) { Console.WriteLine(ex); return; }
+            catch (Exception ex) { 
+                Console.WriteLine(ex);
+                errorMessage = "Failed to filter Pokémon. Please try again.";
+                return;
+                
+            }
         }
 
 
@@ -229,7 +269,7 @@ namespace Pokedex_Blazor.Pages
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
+                    await LoadAllPokemon(mainURL);
                     filteredList = new List<PokemonResult>(names);
                     return;
                 }
@@ -288,7 +328,12 @@ namespace Pokedex_Blazor.Pages
                 filteredList = new List<PokemonResult>(names);
                 StateHasChanged();
             }
-            catch (Exception ex) { Console.WriteLine(ex); return; }
+            catch (Exception ex) { 
+                Console.WriteLine(ex);
+                filteredList = null;
+                names = null;
+                errorMessage = "Failed to find categorie values";
+                return; }
         }
 
         //Simple switch to toggle the filter panel visibility
@@ -303,9 +348,8 @@ namespace Pokedex_Blazor.Pages
             try
             {
                 var searchValue = e.Value?.ToString() ?? "";
-
                 if (filteredList == null)
-                    filteredList = new List<PokemonResult>(names);
+                    filteredList = names;
 
                 if (string.IsNullOrWhiteSpace(searchValue))
                 {
@@ -317,12 +361,16 @@ namespace Pokedex_Blazor.Pages
                     .Where(p => p.name.Contains(searchValue, StringComparison.OrdinalIgnoreCase))
                     .ToList();
             }
-            catch (Exception ex) { Console.WriteLine(ex); return; }
+            catch (Exception ex) 
+            {
+                errorMessage = "Search failed. Please try again.";
+                Console.WriteLine(ex); return; 
+            }
         }
         #endregion
 
         //Comparison Logic
-
+        #region Comparison Logic
         //Function to compare two types and return an affectiveness multiplier
         public double GetFullTypeEffectiveness(List<TypeList> attackerTypes, List<TypeList> defenderTypes)
         {
@@ -390,6 +438,7 @@ namespace Pokedex_Blazor.Pages
             catch (Exception e) {
                 Console.WriteLine(e.ToString());
                 winner = null;
+                errorMessage = "There was an error fighting the pokemon, sorry";
             }
 
         }
@@ -416,7 +465,7 @@ namespace Pokedex_Blazor.Pages
             return total;
         }
 
-
+        //toggle switch to show the compare panel and if turned off clears all the compared pokemon data
         private void ToggleComparePanel()
         {
             showComparePanel = !showComparePanel;
@@ -427,7 +476,7 @@ namespace Pokedex_Blazor.Pages
                 selectedPokemon = null;
             }
         }
-
+        #endregion
 
 
         // Data Models

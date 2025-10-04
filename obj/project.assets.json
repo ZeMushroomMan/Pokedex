@@ -1851,11 +1851,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\muham\\OneDrive\\Desktop\\Pokedex Blazor\\Pokedex Blazor.csproj",
+      "projectUniqueName": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pokedex Blazor.csproj",
       "projectName": "Pokedex Blazor",
-      "projectPath": "C:\\Users\\muham\\OneDrive\\Desktop\\Pokedex Blazor\\Pokedex Blazor.csproj",
+      "projectPath": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pokedex Blazor.csproj",
       "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\muham\\OneDrive\\Desktop\\Pokedex Blazor\\obj\\",
+      "outputPath": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
