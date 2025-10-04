@@ -69,6 +69,10 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Pokedex.razor.css",
@@ -78,12 +82,7 @@
               "RelativeToolTip": "Pages\\Pokedex.razor.css",
               "ViewState": "AgIAAJkAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-04T16:36:06.609Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+              "WhenOpened": "2025-10-04T16:36:06.609Z"
             },
             {
               "$type": "Document",
@@ -95,8 +94,7 @@
               "RelativeToolTip": "wwwroot\\index.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-10-03T23:15:03.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T23:15:03.037Z"
             },
             {
               "$type": "Document",
@@ -168,8 +166,7 @@
               "RelativeToolTip": "Layout\\MainLayout.razor",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-03T01:57:21.71Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T01:57:21.71Z"
             },
             {
               "$type": "Document",
@@ -181,8 +178,7 @@
               "RelativeToolTip": "Layout\\NavMenu.razor.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-03T01:55:52.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T01:55:52.314Z"
             },
             {
               "$type": "Document",
@@ -194,8 +190,7 @@
               "RelativeToolTip": "Layout\\MainLayout.razor.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-03T01:54:54.425Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T01:54:54.425Z"
             },
             {
               "$type": "Document",
@@ -207,8 +202,7 @@
               "RelativeToolTip": "Pages\\Pokedex.razor.cs",
               "ViewState": "AgIAAEEAAAAAAAAAAAAwwA4AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-03T01:50:33.866Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T01:50:33.866Z"
             },
             {
               "$type": "Document",
@@ -218,7 +212,7 @@
               "RelativeDocumentMoniker": "Pages\\Pokedex.razor",
               "ToolTip": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor",
               "RelativeToolTip": "Pages\\Pokedex.razor",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAADkAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAADgAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-03T00:20:08.252Z",
               "EditorCaption": ""

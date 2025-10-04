@@ -1,0 +1,117 @@
+.page[b-j2n0ueugio] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-j2n0ueugio] {
+    flex: 1;
+}
+
+.sidebar[b-j2n0ueugio] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-j2n0ueugio] {
+    background-color: red;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-j2n0ueugio]  a, .top-row[b-j2n0ueugio]  .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+        text-decoration: none;
+    }
+
+    .top-row[b-j2n0ueugio]  a:hover, .top-row[b-j2n0ueugio]  .btn-link:hover {
+        text-decoration: underline;
+    }
+
+    .top-row[b-j2n0ueugio]  a:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 200.98px) {
+    .top-row[b-j2n0ueugio] {
+        justify-content: space-between;
+    }
+
+    .top-row[b-j2n0ueugio]  a, .top-row[b-j2n0ueugio]  .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 150px) {
+    .page[b-j2n0ueugio] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-j2n0ueugio] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-j2n0ueugio] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row.auth[b-j2n0ueugio]  a:first-child {
+        flex: 1;
+        text-align: center;
+        width: 0;
+    }
+
+    .top-row[b-j2n0ueugio], article[b-j2n0ueugio] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+
+    title[b-j2n0ueugio] {
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .title img[b-j2n0ueugio] {
+        max-width: 300px;
+        width: 100%; 
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        
+    }
+    @media (max-width: 640px) {
+        .title img[b-j2n0ueugio] {
+            max-width: 150px; /* smaller on mobile */
+            width: 100%;
+        }
+    }
+
+        .pokedex-header[b-j2n0ueugio] {
+            background-color: red;
+            height: 125px;
+            color: white;
+            text-align: center;
+            
+            font-size: 1.8em;
+            font-weight: bold;
+            border-bottom: 4px solid black;
+            width: 100%; /* make it full width */
+            box-sizing: border-box;
+        }
+
+            .pokedex-header .logo[b-j2n0ueugio] {
+                max-width: 250px;
+                width: 20%;
+                align-content: center;
+                height: auto;
+            }
+    }

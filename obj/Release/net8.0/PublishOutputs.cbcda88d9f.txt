@@ -1,0 +1,2 @@
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\publish\emcc-props.json
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\publish\web.config
