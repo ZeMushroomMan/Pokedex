@@ -2,65 +2,490 @@
 @using System.Net.Http.Json
 @using System.Text.Json
 @inject HttpClient Http
+@inject NavigationManager Nav
 
-<div class="pokedex">
-    <div class="pokedex-header">
-        <h2>Pokédex</h2>
-    </div>
+<div class="pokedex-container">
+    @if (comparePokemon2 != null && showComparePanel)
+    {
 
-    <div class="pokedex-body">
-        <div class="controls">
-            <div class="filter-dropdown">
-                <button class="filter-btn" @onclick="ToggleFilterPanel">Filter ▾</button>
-                <input type="text"
-                       class="search-bar"
-                       placeholder="Search"
-                       @oninput="SearchPokemon" />
-                @if (showFilterPanel)
+        <div class="pokemon-Comparecard">
+            @if (comparePokemon1 != null)
+            {
+                <h2 class="pokemon-name">@comparePokemon1.name</h2>
+                <img src="@comparePokemon1.sprites.front_default" alt="@comparePokemon1.name" />
+
+                <div class="types">
+                    @foreach (var t in comparePokemon1.types)
+                    {
+                        <span class="type @t.type.name">@t.type.name</span>
+                    }
+                </div>
+                <div class="divider"></div>
+                <h3>Stats</h3>
+                <table class="stats-table">
+                    @foreach (var s in comparePokemon1.stats)
+                    {
+                        <tr>
+                            <td class="stat-name">@s.stat.name</td>
+                            <td class="stat-value">@s.base_stat</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>Select a Pokémon to fight with from the right panel</p>
+            }
+            @if (winner != null && winner == comparePokemon1)
+            {
+                <div class="divider"></div>
+                <div class="winner-container">
+                    <span class="winner-text">@winner.name.ToUpper() WINS!</span>
+                </div>
+            }
+            else if (winner == null && comparePokemon1 != null)
+            {
+                <div class="divider"></div>
+                <div class="winner-text draw">
+                    Its a TIE!
+                </div>
+            }
+        </div>
+        <div class="versus-container">
+            <div class="vs-text">VS</div>
+        </div>
+    }
+    @if(!showComparePanel){
+    <div class="pokemon-card">
+        @if (selectedPokemon != null)
+        {
+            <h2 class="pokemon-name">@selectedPokemon.name</h2>
+            <img src="@selectedPokemon.sprites.front_default" alt="@selectedPokemon.name" />
+
+            <div class="types">
+                @foreach (var t in selectedPokemon.types)
                 {
-                    <div class="filter-panel">
-                        <select value="@selectedCategory?.key" @onchange="FilterCategoryChanged">
-                            <option value="">All Pokémon</option>
-                            @foreach (var c in filterCategories)
-                            {
-                                <option value="@c.key">@c.name</option>
-                            }
-                        </select>
+                    <span class="type @t.type.name">@t.type.name</span>
+                }
+            </div>
+            <div class="divider"></div>
+            <div class="basic-info">
+                <p><strong>Height:</strong> @(selectedPokemon.height/10.0) m</p>
+                <p><strong>Weight:</strong> @(selectedPokemon.weight/10.0) kg</p>
+            </div>
+            <div class="divider"></div>
+            <h3>Stats</h3>
+            <table class="stats-table">
+                @foreach (var s in selectedPokemon.stats)
+                {
+                    <tr>
+                        <td class="stat-name">@s.stat.name</td>
+                        <td class="stat-value">@s.base_stat</td>
+                    </tr>
+                }
+            </table>
+            <div class="divider"></div>
+            <h3>Abilities</h3>
+            <ul class="abilities">
+                @foreach (var a in selectedPokemon.abilities)
+                {
+                    <li>@a.ability.name</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Select a Pokémon to view from the right panel</p>
+        }
+    </div>
+    }
+    @if (showComparePanel)
+    {
+        <div class="pokemon-Comparecard">
+            @if (comparePokemon2 != null)
+            {
+                <h2 class="pokemon-name">@comparePokemon2.name</h2>
+                <img src="@comparePokemon2.sprites.front_default" alt="@comparePokemon2.name" />
 
-                        <select value="@selectedValue" @onchange="FilterValueChanged" disabled="@(!filterValues?.Any() ?? true)">
-                            <option value="">Select @selectedCategory?.name</option>
-                            @if (filterValues != null)
-                            {
-                                @foreach (var v in filterValues)
+                <div class="types">
+                    @foreach (var t in comparePokemon2.types)
+                    {
+                        <span class="type @t.type.name">@t.type.name</span>
+                    }
+                </div>
+                <div class="divider"></div>
+                <h3>Stats</h3>
+                <table class="stats-table">
+                    @foreach (var s in comparePokemon2.stats)
+                    {
+                        <tr>
+                            <td class="stat-name">@s.stat.name</td>
+                            <td class="stat-value">@s.base_stat</td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>Select a Pokémon to fight against from the right panel</p>
+            }
+            @if (winner != null && winner == comparePokemon2)
+            {
+                <div class="divider"></div>
+                <div class="winner-container">
+                    <span class="winner-text">@winner.name.ToUpper() WINS!</span>
+                </div>
+            }
+            else if (winner == null && comparePokemon1 != null)
+            {
+                <div class="divider"></div>
+                <div class="winner-text draw">
+                    It's a TIE!
+                </div>
+            }
+
+        </div>
+
+    }
+
+    <div class="pokedex">
+        <div class="pokedex-header">
+            <h2>Pokédex</h2>
+        </div>
+
+        <div class="pokedex-body">
+            <div class="controls">
+                <div class="filter-dropdown">
+                    <button class="filter-btn" @onclick="ToggleFilterPanel">Filter ▾</button>
+                    <input type="text"
+                           class="search-bar"
+                           placeholder="Search"
+                           @oninput="SearchPokemon" />
+                     
+                    @if (showFilterPanel)
+                    {
+                        <div class="filter-panel">
+                            <select value="@selectedCategory?.key" @onchange="FilterCategoryChanged">
+                                <option value="">All Pokémon</option>
+                                @foreach (var c in filterCategories)
                                 {
-                                    <option value="@v.name">@v.name</option>
+                                    <option value="@c.key">@c.name</option>
                                 }
-                            }
-                        </select>
+                            </select>
+
+                            <select value="@selectedValue" @onchange="FilterValueChanged" disabled="@(!filterValues?.Any() ?? true)">
+                                <option value="">Select @selectedCategory?.name</option>
+                                @if (filterValues != null)
+                                {
+                                    @foreach (var v in filterValues)
+                                    {
+                                        <option value="@v.name">@v.name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    }
+                </div>
+                @if (!showComparePanel)
+                {
+                    <button class="filter-btn" @onclick="ToggleComparePanel">Fight</button>
+                }
+                else
+                {
+                    <button class="filter-btn" @onclick="ToggleComparePanel">View</button>
+                }
+                <button class="filter-btn" @onclick="Clear">Clear</button>
+            </div>
+
+            <div class="scroll-list">
+                @foreach (var p in names)
+                {
+                    <div class="card" @onclick="() => LoadPokemonDetails(p.url)">
+                        <span class="card-name">@p.name</span>
                     </div>
                 }
             </div>
-        </div>
-
-        <div class="scroll-list">
-            @foreach (var p in names)
-            {
-                <div class="card" @onclick="() => LoadAllPokemon(next)">
-                    <span class="card-name">@p.name</span>
-                </div>
-            }
         </div>
     </div>
 </div>
 
 <style>
-    .search-bar {
-        padding: 6px 10px;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        font-size: 1em;
-        width: 200px;
+    .winner-text {
+        font-size: 1.8em;
+        font-weight: bold;
+        text-align: center;
+        margin: 16px 0;
+        color: #ff3e3e;
+        text-shadow: 2px 2px #fff, 4px 4px #ffd700;
     }
+
+        .winner-text.draw {
+            color: #4a90e2; 
+            text-shadow: 2px 2px #fff, 4px 4px #ccc;
+        }
+
+
+    .versus-container {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        margin: 20px 0;
+        position: relative;
+    }
+
+    .vs-text {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #ff0000;
+        margin: 0 10px;
+        animation: pulse 1.5s infinite alternate;
+        font-family: 'Pokemon Solid', sans-serif;
+        letter-spacing: 2px;
+        text-align:center;
+    }
+
+    .pokemon-Comparecard{
+        width: 450px;
+        height: auto;
+        background: #fff;
+        border: 4px solid #d32f2f;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        text-align: center;
+        padding: 20px;
+        position: relative;
+    }
+    .divider {
+        border-top: 2px solid #ef5350;
+        margin: 10px 0;
+    }
+    .pokedex-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 24px;
+        padding: 24px;
+        min-height: 80vh;
+        background-color: white;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .pokemon-card {
+        width: 450px;
+        height:auto;
+        background: #fff;
+        border: 4px solid #d32f2f;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        text-align: center;
+        padding: 20px;
+        position: relative;
+    }
+
+        .pokemon-card::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: calc(100% + 16px);
+            height: calc(100% + 16px);
+            border: 2px solid #ff5252;
+            border-radius: 20px;
+        }
+
+        .pokemon-card img {
+            width: 150px;
+            max-width: 150px;
+            margin-bottom: 1px;
+        }
+
+    .pokemon-name {
+        text-transform: capitalize;
+        font-size: 1.8em;
+        margin-bottom: 8px;
+    }
+
+    .types {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+
+    .type {
+        padding: 4px 10px;
+        border-radius: 12px;
+        color: white;
+        font-weight: bold;
+        text-transform: capitalize;
+        font-size: 0.85em;
+    }
+
+        .type.fire {
+            background-color: #f08030;
+        }
+
+        .type.water {
+            background-color: #6890f0;
+        }
+
+        .type.grass {
+            background-color: #78c850;
+        }
+
+        .type.electric {
+            background-color: #f8d030;
+        }
+
+        .type.ice {
+            background-color: #98d8d8;
+        }
+
+        .type.fighting {
+            background-color: #c03028;
+        }
+
+        .type.poison {
+            background-color: #a040a0;
+        }
+
+        .type.ground {
+            background-color: #e0c068;
+            color: black;
+        }
+
+        .type.flying {
+            background-color: #a890f0;
+        }
+
+        .type.psychic {
+            background-color: #f85888;
+        }
+
+        .type.bug {
+            background-color: #a8b820;
+            color: black;
+        }
+
+        .type.rock {
+            background-color: #b8a038;
+            color: black;
+        }
+
+        .type.ghost {
+            background-color: #705898;
+        }
+
+        .type.dragon {
+            background-color: #7038f8;
+        }
+
+        .type.dark {
+            background-color: #705848;
+        }
+
+        .type.steel {
+            background-color: #b8b8d0;
+            color: black;
+        }
+
+        .type.fairy {
+            background-color: #ee99ac;
+        }
+
+    .stats-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+    }
+
+        .stats-table td {
+            padding: 4px 8px;
+        }
+
+    .stat-name {
+        font-weight: bold;
+        text-transform: capitalize;
+        text-align: justify;
+    }
+
+    .stat-value {
+        text-align: left;
+    }
+
+    .abilities {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .pokedex {
+        flex: 1;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        height: 670px;
+    }
+
+    .pokedex-header {
+        background-color: red;
+        color: white;
+        text-align: center;
+        padding: 16px;
+        font-size: 1.5em;
+        font-weight: bold;
+        border-bottom: 4px solid black;
+    }
+
+    .pokedex-body {
+        background: white;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        gap: 8px;
+        overflow-y: hidden;
+    }
+
+    .controls {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-shrink: 0;
+    }
+
+    .scroll-list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        overflow-y: auto;
+        padding-right:6px;
+    }
+
+    .card {
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+    .card-name {
+        text-transform: capitalize;
+        font-weight: 600;
+        color: #333;
+    }
+
     .filter-dropdown {
         position: relative;
         display: inline-block;
@@ -105,348 +530,11 @@
             cursor: pointer;
         }
 
-    .pokedex {
-        max-width: 600px;
-        margin: 24px auto;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-        font-family: 'Segoe UI', Roboto, sans-serif;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .pokedex-header {
-        background-color: red;
-        color: white;
-        text-align: center;
-        padding: 20px 0;
-        font-size: 1.8em;
-        font-weight: bold;
-        border-bottom: 4px solid black;
-    }
-
-    .pokedex-body {
-        background-color: white;
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        height: 600px;
-    }
-
-    .controls {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 8px;
-    }
-
-    .page-number {
-        font-weight: bold;
-        font-size: 1em;
-        margin-right: auto;
-    }
-
-    .scroll-list {
-        flex: 1;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        padding-right: 4px;
-    }
-
-    .card {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 12px;
-        background: linear-gradient(180deg, #fff, #f8f8f8);
+    .search-bar {
+        padding: 6px 10px;
         border-radius: 8px;
         border: 1px solid #ddd;
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+        font-size: 1em;
+        width: 200px;
     }
-
-        .card:hover {
-            border: 2px solid #00bcd4;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        .card:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-    .card-name {
-        text-transform: capitalize;
-        font-weight: 600;
-        color: #333;
-    }
-
-    .pokemon-btn {
-        padding: 6px 12px;
-        border-radius: 8px;
-        border: none;
-        background-color: #ef5350;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
-    }
-
-        .pokemon-btn:hover {
-            background-color: #ff6666;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-        }
-
-        .pokemon-btn:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-            background-color: #b2ebf2;
-        }
 </style>
-
-@code {
-    [Inject] private IJSRuntime JS { get; set; }
-    private static readonly HttpClient client = new HttpClient();
-
-    private string searchText = "";
-    private int pageNumber = 1;
-    private bool showFilterPanel = false;
-    private string next = "";
-    private string prev = "";
-
-    private List<PokemonResult> names = new List<PokemonResult>();
-    private List<PokemonResult> allTypes = new List<PokemonResult>();
-    private List<PokemonResult> filteredList;
-
-    private List<FilterCategory> filterCategories = new List<FilterCategory>
-    {
-        new FilterCategory { key = "type", name = "Type" },
-        new FilterCategory { key = "ability", name = "Ability" },
-        new FilterCategory { key = "color", name = "Color" },
-        new FilterCategory { key = "shape", name = "Shape" },
-        new FilterCategory { key = "habitat", name = "Habitat" },
-        new FilterCategory { key = "generation", name = "Generation" }
-    };
-
-    private FilterCategory selectedCategory;
-    private string selectedValue;
-    private List<PokemonResult> filterValues;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
-    }
-
-    // Load full Pokémon list with caching
-    private async Task<PokemonListResponse> LoadAllPokemon(string url)
-    {
-        var cached = await LoadCacheAsync<PokemonListResponse>(url);
-        if (cached != null && cached.results?.Count > 0)
-        {
-            names = cached.results;
-            next = cached.next;
-            prev = cached.previous;
-            return cached;
-        }
-
-        var response = await client.GetFromJsonAsync<PokemonListResponse>(url);
-        if (response != null)
-        {
-            names = response.results;
-            next = response.next;
-            prev = response.previous;
-            await SaveCacheAsync(url, response);
-        }
-
-        return response;
-    }
-
-    // Caching functions
-    private async Task SaveCacheAsync<T>(string key, T data)
-    {
-        var json = JsonSerializer.Serialize(data);
-        await JS.InvokeVoidAsync("localStorage.setItem", key, json);
-    }
-
-    private async Task<T> LoadCacheAsync<T>(string key)
-    {
-        var json = await JS.InvokeAsync<string>("localStorage.getItem", key);
-        if (string.IsNullOrEmpty(json)) return default;
-        return JsonSerializer.Deserialize<T>(json);
-    }
-
-    // Filtering
-    private async Task FilterCategoryChanged(ChangeEventArgs e)
-    {
-        var selectedKey = e.Value?.ToString();
-        selectedCategory = filterCategories.FirstOrDefault(c => c.key == selectedKey);
-        selectedValue = null;
-        filterValues = null;
-
-        if (string.IsNullOrEmpty(selectedKey))
-        {
-            await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
-            pageNumber = 1;
-            return;
-        }
-
-        string url = selectedCategory.key switch
-        {
-            "type" => "https://pokeapi.co/api/v2/type",
-            "ability" => "https://pokeapi.co/api/v2/ability",
-            "color" => "https://pokeapi.co/api/v2/pokemon-color",
-            "shape" => "https://pokeapi.co/api/v2/pokemon-shape",
-            "habitat" => "https://pokeapi.co/api/v2/pokemon-habitat",
-            "generation" => "https://pokeapi.co/api/v2/generation",
-            _ => ""
-        };
-
-        if (string.IsNullOrEmpty(url)) return;
-
-        var cached = await LoadCacheAsync<PokemonListResponse>(url);
-        if (cached != null)
-            filterValues = cached.results;
-        else
-        {
-            var response = await client.GetFromJsonAsync<PokemonListResponse>(url);
-            if (response != null)
-            {
-                filterValues = response.results;
-                await SaveCacheAsync(url, response);
-            }
-        }
-    }
-
-    private async Task FilterValueChanged(ChangeEventArgs e)
-    {
-        selectedValue = e.Value?.ToString();
-
-        if (string.IsNullOrEmpty(selectedValue))
-        {
-            await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
-            pageNumber = 1;
-            return;
-        }
-
-        if (selectedCategory != null)
-            await FilterByCategoryValue(selectedCategory.key, selectedValue);
-    }
-
-    private async Task FilterByCategoryValue(string categoryKey, string value)
-    {
-        if (string.IsNullOrEmpty(value))
-        {
-            await LoadAllPokemon("https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000");
-            pageNumber = 1;
-            filteredList = new List<PokemonResult>(names); // store full list
-            return;
-        }
-
-        string url = categoryKey switch
-        {
-            "type" => $"https://pokeapi.co/api/v2/type/{value}",
-            "ability" => $"https://pokeapi.co/api/v2/ability/{value}",
-            "color" => $"https://pokeapi.co/api/v2/pokemon-color/{value}",
-            "shape" => $"https://pokeapi.co/api/v2/pokemon-shape/{value}",
-            "habitat" => $"https://pokeapi.co/api/v2/pokemon-habitat/{value}",
-            "generation" => $"https://pokeapi.co/api/v2/generation/{value}",
-            _ => ""
-        };
-
-        if (string.IsNullOrEmpty(url)) return;
-
-        List<PokemonResult> filtered;
-
-        if (categoryKey == "type" || categoryKey == "ability")
-        {
-            var cached = await LoadCacheAsync<CategoryResult>(url);
-            if (cached != null)
-                filtered = cached.pokemon.Select(p => p.pokemon).ToList();
-            else
-            {
-                var response = await client.GetFromJsonAsync<CategoryResult>(url);
-                filtered = response.pokemon.Select(p => p.pokemon).ToList();
-                await SaveCacheAsync(url, response);
-            }
-        }
-        else
-        {
-            var cached = await LoadCacheAsync<PokemonSpecies>(url);
-            if (cached != null)
-                filtered = cached.pokemon_species.Select(p => new PokemonResult { name = p.name, url = $"https://pokeapi.co/api/v2/pokemon/{p.name}" }).ToList();
-            else
-            {
-                var response = await client.GetFromJsonAsync<PokemonSpecies>(url);
-                filtered = response.pokemon_species.Select(p => new PokemonResult { name = p.name, url = $"https://pokeapi.co/api/v2/pokemon/{p.name}" }).ToList();
-                await SaveCacheAsync(url, response);
-            }
-        }
-
-        names = filtered;
-        filteredList = new List<PokemonResult>(names); // store filtered list for search
-        pageNumber = 1;
-        StateHasChanged();
-    }
-
-
-    private void ToggleFilterPanel()
-    {
-        showFilterPanel = !showFilterPanel;
-    }
-
-    private void SearchPokemon(ChangeEventArgs e)
-    {
-        var searchValue = e.Value?.ToString() ?? "";
-
-        if (string.IsNullOrWhiteSpace(searchValue))
-        {
-            names = filteredList != null ? new List<PokemonResult>(filteredList) : names;
-            return;
-        }
-
-        names = filteredList
-            .Where(p => p.name.Contains(searchValue, StringComparison.OrdinalIgnoreCase))
-            .ToList();
-    }
-
-    // Data Models
-    public class PokemonListResponse
-    {
-        public List<PokemonResult> results { get; set; }
-        public string next { get; set; }
-        public string previous { get; set; }
-    }
-
-    public class PokemonResult
-    {
-        public string name { get; set; }
-        public string url { get; set; }
-    }
-
-    public class CategoryResult
-    {
-        public List<PokemonEntry> pokemon { get; set; } //12
-    }
-
-    public class PokemonEntry
-    {
-        public PokemonResult pokemon { get; set; }
-    }
-
-    public class FilterCategory
-    {
-        public string key { get; set; }
-        public string name { get; set; }
-    }
-
-    public class PokemonSpecies
-    {
-        public List<PokemonResult> pokemon_species { get; set; }
-    }
-}

@@ -16,7 +16,7 @@ main[b-j2n0ueugio] {
     background-color: red;
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
-    height: 5.5rem;
+    height: 4.5rem;
     display: flex;
     align-items: center;
 }
@@ -36,7 +36,7 @@ main[b-j2n0ueugio] {
         text-overflow: ellipsis;
     }
 
-@media (max-width: 640.98px) {
+@media (max-width: 200.98px) {
     .top-row[b-j2n0ueugio] {
         justify-content: space-between;
     }
@@ -46,7 +46,7 @@ main[b-j2n0ueugio] {
     }
 }
 
-@media (min-width: 641px) {
+@media (min-width: 150px) {
     .page[b-j2n0ueugio] {
         flex-direction: row;
     }
@@ -81,27 +81,37 @@ main[b-j2n0ueugio] {
     }
 
     .title img[b-j2n0ueugio] {
-        max-width: 300px; /* adjust width as needed */
-        width: 80%; /* responsive on smaller screens */
+        max-width: 300px;
+        width: 100%; 
         height: auto;
-        align-content: center;
-        text-align: center;
+        display: block;
+        margin: 0 auto;
+        
     }
-    .pokedex-header[b-j2n0ueugio] {
-        background-color: red;
-        color: white;
-        text-align: center;
-        padding: 20px 0;
-        font-size: 1.8em;
-        font-weight: bold;
-        border-bottom: 4px solid black;
-        width: 100%; /* make it full width */
-        box-sizing: border-box;
+    @media (max-width: 640px) {
+        .title img[b-j2n0ueugio] {
+            max-width: 150px; /* smaller on mobile */
+            width: 100%;
+        }
     }
 
-        .pokedex-header .logo[b-j2n0ueugio] {
-            max-width: 250px;
-            width: 20%;
-            height: auto;
+        .pokedex-header[b-j2n0ueugio] {
+            background-color: red;
+            height: 125px;
+            color: white;
+            text-align: center;
+            
+            font-size: 1.8em;
+            font-weight: bold;
+            border-bottom: 4px solid black;
+            width: 100%; /* make it full width */
+            box-sizing: border-box;
         }
-}
+
+            .pokedex-header .logo[b-j2n0ueugio] {
+                max-width: 250px;
+                width: 20%;
+                align-content: center;
+                height: auto;
+            }
+    }

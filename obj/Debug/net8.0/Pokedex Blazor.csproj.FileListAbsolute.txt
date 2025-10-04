@@ -1,4 +1,14 @@
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\blazor.webassembly.js
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.js
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.js.map
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.js
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.wasm
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.js
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.js.map
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\icudt_CJK.dat
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\icudt_EFIGS.dat
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\icudt_no_CJK.dat
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\emcc-props.json
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Authorization.wasm
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Components.wasm
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Forms.wasm
@@ -190,16 +200,6 @@ C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framewo
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\mscorlib.wasm
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\netstandard.wasm
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\System.Private.CoreLib.wasm
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.js
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.js.map
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.js
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.native.wasm
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.js
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\dotnet.runtime.js.map
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\icudt_CJK.dat
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\icudt_EFIGS.dat
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\icudt_no_CJK.dat
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\emcc-props.json
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\Pokedex Blazor.wasm
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\Pokedex Blazor.pdb
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\bin\Debug\net8.0\wwwroot\_framework\blazor.boot.json
@@ -1033,6 +1033,6 @@ C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\Pokedex Blazor.d
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\refint\Pokedex Blazor.dll
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\Pokedex Blazor.pdb
 C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\ref\Pokedex Blazor.dll
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\compressed\qfyd3ji2tu-guu6o5360t.gz
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\compressed\gws6f7zxby-3jm8z6noac.gz
-C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\compressed\zvsvo8u4dn-q26x4wq4bh.gz
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\compressed\qfyd3ji2tu-iwlgp1cr88.gz
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\compressed\gws6f7zxby-3cs4m9afuw.gz
+C:\Users\muham\OneDrive\Desktop\Pokedex Blazor\obj\Debug\net8.0\compressed\zvsvo8u4dn-zx9otk3u94.gz
