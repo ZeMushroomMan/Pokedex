@@ -2073,6 +2073,6 @@ C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\refint\Pokedex
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\Pokedex Blazor.pdb
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\ref\Pokedex Blazor.dll
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\scopedcss\Pages\Pokedex.razor.rz.scp.css
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\compressed\qfyd3ji2tu-8hn04w1zjr.gz
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\compressed\gws6f7zxby-xpslii8d5t.gz
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\compressed\zvsvo8u4dn-xghuwfsxjy.gz
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\compressed\qfyd3ji2tu-dljaqfbxbc.gz
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\compressed\gws6f7zxby-rl597v0ya9.gz
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Debug\net8.0\compressed\zvsvo8u4dn-b3q8arb8u8.gz

@@ -42,6 +42,15 @@ namespace Pokedex_Blazor.Pages
         private string errorMessage = null;
         private string mainURL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=200000";
 
+        private const int CacheTtlDays = 30;
+
+        // Helper class for cache entry with timestamp
+        private class CacheEntry<T>
+        {
+            public DateTime CachedAt { get; set; }
+            public T Data { get; set; }
+        }
+
         //constructor that runs at start of the page. Passes the url to make the API call to, to fetch names and urls of all pokemon currently on the API and saves it into a List
         protected override async Task OnInitializedAsync()
         {
@@ -148,14 +157,18 @@ namespace Pokedex_Blazor.Pages
 
         // Caching functions
         #region Caching
-        //Saves current Api call into a local browser cache to prevent excessive api calls for every single page load and action. This function is called in every other function that uses any API calls. 
-        //Stores data and uses the url for the api call as the key so if the same url is passed it can fetch the cached data first
+        // Save data to cache with timestamp
         private async Task SaveCacheAsync<T>(string key, T data)
         {
             try
             {
                 errorMessage = null;
-                var json = JsonSerializer.Serialize(data);
+                var entry = new CacheEntry<T>
+                {
+                    CachedAt = DateTime.UtcNow,
+                    Data = data
+                };
+                var json = JsonSerializer.Serialize(entry);
                 await JS.InvokeVoidAsync("localStorage.setItem", key, json);
             }
             catch (Exception ex)
@@ -164,7 +177,8 @@ namespace Pokedex_Blazor.Pages
                 Console.WriteLine($"Error saving to cache: {ex.Message}");
             }
         }
-        //Loads the cached data from the url key stored
+
+        // Load data from cache, check TTL, and remove if expired
         private async Task<T> LoadCacheAsync<T>(string key)
         {
             try
@@ -172,7 +186,38 @@ namespace Pokedex_Blazor.Pages
                 errorMessage = null;
                 var json = await JS.InvokeAsync<string>("localStorage.getItem", key);
                 if (string.IsNullOrEmpty(json)) return default;
-                return JsonSerializer.Deserialize<T>(json);
+
+                CacheEntry<T> entry;
+                try
+                {
+                    entry = JsonSerializer.Deserialize<CacheEntry<T>>(json);
+                }
+                catch
+                {
+                    // Fallback for legacy cache (without timestamp)
+                    var legacyData = JsonSerializer.Deserialize<T>(json);
+                    if (legacyData != null)
+                    {
+                        // Remove legacy cache to force refresh next time
+                        await JS.InvokeVoidAsync("localStorage.removeItem", key);
+                    }
+                    return default;
+                }
+
+                if (entry == null || entry.Data == null)
+                {
+                    await JS.InvokeVoidAsync("localStorage.removeItem", key);
+                    return default;
+                }
+
+                // Check TTL
+                if ((DateTime.UtcNow - entry.CachedAt).TotalDays > CacheTtlDays)
+                {
+                    await JS.InvokeVoidAsync("localStorage.removeItem", key);
+                    return default;
+                }
+
+                return entry.Data;
             }
             catch (Exception ex)
             {

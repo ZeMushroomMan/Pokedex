@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|c:\\users\\muham\\onedrive\\documents\\github\\pokedex\\pages\\pokedex.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|solutionrelative:pages\\pokedex.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|c:\\users\\muham\\onedrive\\documents\\github\\pokedex\\pages\\pokedex.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|solutionrelative:pages\\pokedex.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|c:\\users\\muham\\onedrive\\documents\\github\\pokedex\\pages\\pokedex.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|solutionrelative:pages\\pokedex.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|c:\\users\\muham\\onedrive\\documents\\github\\pokedex\\pages\\pokedex.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|solutionrelative:pages\\pokedex.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E70A73DF-EE51-4E46-B158-41399D700F34}|Pokedex Blazor.csproj|c:\\users\\muham\\onedrive\\documents\\github\\pokedex\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -58,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,16 +74,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Pokedex.razor.css",
               "DocumentMoniker": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor.css",
               "RelativeDocumentMoniker": "Pages\\Pokedex.razor.css",
               "ToolTip": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor.css",
               "RelativeToolTip": "Pages\\Pokedex.razor.css",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAALcAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-04T16:36:06.609Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-04T16:36:06.609Z"
             },
             {
               "$type": "Document",
@@ -95,8 +94,7 @@
               "RelativeToolTip": "wwwroot\\index.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-10-03T23:15:03.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T23:15:03.037Z"
             },
             {
               "$type": "Document",
@@ -196,20 +194,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Pokedex.razor.cs",
               "DocumentMoniker": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor.cs",
               "RelativeDocumentMoniker": "Pages\\Pokedex.razor.cs",
-              "ToolTip": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor.cs",
-              "RelativeToolTip": "Pages\\Pokedex.razor.cs",
-              "ViewState": "AgIAAKcBAAAAAAAAAAAiwOABAAAnAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor.cs*",
+              "RelativeToolTip": "Pages\\Pokedex.razor.cs*",
+              "ViewState": "AgIAALcAAAAAAAAAAAAlwLUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-03T01:50:33.866Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Pokedex.razor",
               "DocumentMoniker": "C:\\Users\\muham\\OneDrive\\Documents\\GitHub\\Pokedex\\Pages\\Pokedex.razor",
               "RelativeDocumentMoniker": "Pages\\Pokedex.razor",
@@ -217,8 +215,7 @@
               "RelativeToolTip": "Pages\\Pokedex.razor",
               "ViewState": "AgIAADEAAAAAAAAAAAAAALwAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-03T00:20:08.252Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-03T00:20:08.252Z"
             }
           ]
         }
