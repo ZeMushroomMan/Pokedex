@@ -194,11 +194,9 @@ namespace Pokedex_Blazor.Pages
                 }
                 catch
                 {
-                    // Fallback for legacy cache (without timestamp)
                     var legacyData = JsonSerializer.Deserialize<T>(json);
                     if (legacyData != null)
                     {
-                        // Remove legacy cache to force refresh next time
                         await JS.InvokeVoidAsync("localStorage.removeItem", key);
                     }
                     return default;

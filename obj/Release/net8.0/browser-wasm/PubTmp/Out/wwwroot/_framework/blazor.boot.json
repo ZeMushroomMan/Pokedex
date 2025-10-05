@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Pokedex Blazor",
   "resources": {
-    "hash": "sha256-VoI+uDHGzKuBkasJKH3HgaTyklLtjdN7ww/4RfXf7KE=",
+    "hash": "sha256-s/D9OeL65VSCOYtRFvd5YMLzyRgNjJOPub1jxWd2+5Y=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-D0bzod5lwwSzPR43JC8TTCcZKw+3jIHOk8CZFCRj5is="
     },
@@ -44,12 +44,12 @@
       "System.Net.Primitives.wasm": "sha256-0iGE/TGI/dumMWRUO0h+zhTxOl/QcHYzx9mS2hxiK3s=",
       "System.Private.Uri.wasm": "sha256-EL3cMn9tZr/2xwMuFI6cNypSKLu++RDPJP4UvtWWcAA=",
       "System.Runtime.InteropServices.JavaScript.wasm": "sha256-VobV4s6waaPCxdGb/7K0/4/r409Bna15Y0gB0Uvt2e8=",
-      "System.Runtime.wasm": "sha256-51B1PfuvOK9vtWt8lbolMXBY7ZlU2Q84O2LuVpcL4j8=",
+      "System.Runtime.wasm": "sha256-CLuSjZYvb27zCamv7e2odNCSCeT3CXOBnJ5Dx0+vWII=",
       "System.Text.Encodings.Web.wasm": "sha256-bDRdy+G9zVcWlrj3vP+blIqH38T9rpqxvXdcv1INqnE=",
       "System.Text.Json.wasm": "sha256-yyKkODanyxktG6hGJIZAH52g1zd/ajlwcWcExOQ6eAo=",
       "System.Text.RegularExpressions.wasm": "sha256-SW5L77HZP6F1seYrYKk/8bCw55JedaRD8wTtEYIeaPY=",
-      "System.Private.CoreLib.wasm": "sha256-EVSHVZiWUSY8kCVC4oTdF1G100W7AZ9qNS3DvzVT2eA=",
-      "Pokedex Blazor.wasm": "sha256-qQ0Z81Ixdgfe9ueMXJ0Hb3n+O5Di40WzEe/7LAEpXGQ="
+      "System.Private.CoreLib.wasm": "sha256-OUmif2SoH5l6TWbc1Jb/hBgjOTg2RbxTfmjMUudEF90=",
+      "Pokedex Blazor.wasm": "sha256-4Ne7jj4ctXVA+gZVe8mGCHSPHDVT/WteenNK0BDsK0Y="
     }
   },
   "cacheBootResources": true,

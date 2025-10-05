@@ -1035,6 +1035,6 @@ C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\refint\Poked
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\Pokedex Blazor.pdb
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\ref\Pokedex Blazor.dll
 C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\staticwebassets.upToDateCheck.txt
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\qfyd3ji2tu-futdm5tdu6.gz
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\gws6f7zxby-3kdt6fjg2p.gz
-C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\zvsvo8u4dn-cw7x2u216i.gz
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\qfyd3ji2tu-821unwog7s.gz
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\gws6f7zxby-29f2wilyuo.gz
+C:\Users\muham\OneDrive\Documents\GitHub\Pokedex\obj\Release\net8.0\compressed\zvsvo8u4dn-0x5cmqby6b.gz
