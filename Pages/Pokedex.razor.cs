@@ -44,12 +44,6 @@ namespace Pokedex_Blazor.Pages
 
         private const int CacheTtlDays = 30;
 
-        // Helper class for cache entry with timestamp
-        private class CacheEntry<T>
-        {
-            public DateTime CachedAt { get; set; }
-            public T Data { get; set; }
-        }
 
         //constructor that runs at start of the page. Passes the url to make the API call to, to fetch names and urls of all pokemon currently on the API and saves it into a List
         protected override async Task OnInitializedAsync()
@@ -208,7 +202,6 @@ namespace Pokedex_Blazor.Pages
                     return default;
                 }
 
-                // Check TTL
                 if ((DateTime.UtcNow - entry.CachedAt).TotalDays > CacheTtlDays)
                 {
                     await JS.InvokeVoidAsync("localStorage.removeItem", key);
@@ -529,6 +522,12 @@ namespace Pokedex_Blazor.Pages
 
         // Data Models
         #region Data Models
+        private class CacheEntry<T>
+        {
+            public DateTime CachedAt { get; set; }
+            public T Data { get; set; }
+        }
+
         public class PokemonListResponse
         {
             public List<PokemonResult> results { get; set; }
